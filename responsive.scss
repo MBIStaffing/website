@@ -318,35 +318,52 @@ $glp_col-11-12: (100%/11);
 
 
 
-
-/************************
-    HIDING COLS
-*************************/
-[class*="#{$gl-colName}-"]:not([class*="#{$gl-colName}-0"]) {
-  display: block;
-}
-[class*="#{$gl-gridName}"][class*="#{$gl-colName}-"]:not([class*="#{$gl-colName}-0"]) {
-  display: flex;
-}
-[class*="#{$gl-colName}-0"] {
-  display: none;
-}
-@mixin responsiveHide($breakpoints) {
+/********************************************
+    Responsive Alignment and Hidden
+*********************************************/
+@mixin responsiveDisplay($breakpoints) {
   @each $breakpoint-name, $breakpoint-value in $breakpoints {
-    @media screen and (min-width: $breakpoint-value) {
-     [class*="#{$gl-colName}-"]:not([class*="_#{$breakpoint-name}-0"]) {
+    @if($breakpoint-value == 0) {
+      [class*="#{$gl-colName}-"]:not([class*="#{$gl-colName}-0"]) {
         display: block;
       }
-      [class*="#{$gl-gridName}"][class*="#{$gl-colName}-"]:not([class*="_#{$breakpoint-name}-0"])  {
+      [class*="#{$gl-gridName}"][class*="#{$gl-colName}-"]:not([class*="#{$gl-colName}-0"]) {
         display: flex;
       }
-      [class*="#{$gl-colName}-"][class*="_#{$breakpoint-name}-0"]{
+      [class*="#{$gl-colName}-0"] {
         display: none;
+      }
+      @content
+    }
+    @else {
+      @media screen and (min-width: $breakpoint-value) {
+        [class*="#{$gl-colName}-"]:not([class*="_#{$breakpoint-name}-0"]) {
+          display: block;
+        }
+        [class*="#{$gl-gridName}"][class*="#{$gl-colName}-"]:not([class*="_#{$breakpoint-name}-0"])  {
+          display: flex;
+        }
+        [class*="#{$gl-colName}-"][class*="_#{$breakpoint-name}-0"]{
+          display: none;
+        }
+        @content
       }
     }
   }
 }
-@include responsiveHide($breakpoints);
+@include responsiveDisplay($breakpoints) {
+  [class*="text-align-"][class*="-l"] { text-align: left; }
+  [class*="text-align-"][class*="-r"] { text-align: right; }
+  [class*="text-align-"][class*="-c"] { text-align: center; }
+  [class*="text-align-"][class*="-j"] { text-align: justify; }
+  [class*="float-"][class*="-l"] { float: left; }
+  [class*="float-"][class*="-r"] { float: right; }
+  [class*="float-"][class*="-n"] { float: none; }
+}
+
+
+
+
 
 /************************
     GRID BY NUMBER
@@ -467,6 +484,10 @@ $space-prefixes : (
   }
 }
 
+
+
+
+
 // main function definition
 @mixin make-space($prefixes, $breakpoints, $values) {
   @each $breakpoint-name, $breakpoint-value in $breakpoints {
@@ -483,27 +504,3 @@ $space-prefixes : (
   }
 }
 @include make-space($space-prefixes, $breakpoints, $space-values );
-
-
-
-@mixin responsiveAlign($breakpoints) {
-  @each $breakpoint-name, $breakpoint-value in $breakpoints {
-    @if($breakpoint-value == 0) {
-      @content 
-    }
-    @else {
-      @media screen and (min-width: $breakpoint-value) {
-        @content
-      }
-    }
-  }
-}
-@include responsiveAlign($breakpoints) {
-  [class*="text-align-"][class*="-l"] { text-align: left; }
-  [class*="text-align-"][class*="-r"] { text-align: right; }
-  [class*="text-align-"][class*="-c"] { text-align: center; }
-  [class*="text-align-"][class*="-j"] { text-align: justify; }
-  [class*="float-"][class*="-l"] { float: left; }
-  [class*="float-"][class*="-r"] { float: right; }
-  [class*="float-"][class*="-n"] { float: none; }
-}
