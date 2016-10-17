@@ -120,6 +120,7 @@ $glp_col-11-12: (100%/11);
   flex: 0 0 auto;
   padding: 0 ($gl-gutter/2) $gl-col-bottom;
   width: 100%;
+  position: relative;
 }
 .#{$gl-colName}{
   flex: 1 1 0%;
@@ -135,8 +136,6 @@ $glp_col-11-12: (100%/11);
 *************************/
 
 
-@mixin makeHelpers($foo) 
-{
 // FOR GRID
 [class*="#{$gl-gridName}-"]{
 // No spacing between cols : noGutter
@@ -146,7 +145,6 @@ $glp_col-11-12: (100%/11);
       padding: 0;
     }
   }
-
 // Horizontal alignment
   &[class*="-center"]{
     justify-content: center;
@@ -198,7 +196,8 @@ $glp_col-11-12: (100%/11);
     padding-bottom: 0;
   }
 }
-}
+
+
 
 // FOR COL
 [class*="#{$gl-colName}-"]{
@@ -219,6 +218,107 @@ $glp_col-11-12: (100%/11);
   }
 }
 
+
+@mixin alignSelf($breakpoints) {
+@each $breakpoint-name, $breakpoint-value in $breakpoints {
+ @if $breakpoint-value == 0 {
+ }
+ @else {
+  @media screen and (min-width: $breakpoint-value) {
+// FOR GRID
+[class*="#{$gl-gridName}-"]{
+// No spacing between cols : noGutter
+  &[class*="-noGutter"]{
+    margin: 0;
+    > [class*="#{$gl-colName}"]{
+      padding: 0;
+    }
+  }
+// Horizontal alignment
+  &[class*="-center"]{
+    justify-content: center;
+  }
+  &[class*="-right"]{
+    justify-content: flex-end;
+    align-self: flex-end;
+    margin-left: auto;
+  }
+// Vertical alignment
+  &[class*="-top"]{
+    align-items: flex-start;
+  }
+  &[class*="-middle"]{
+    align-items: center;
+  }
+  &[class*="-bottom"]{
+    align-items: flex-end;
+  }
+
+// Orders
+  &[class*="-reverse"]{
+    flex-direction: row-reverse;
+  }
+  &[class*="-column"] {
+    flex-direction: column;
+    > [class*="#{$gl-colName}-"] {
+      flex-basis: auto;
+    }
+  }
+  &[class*="-column-reverse"]{
+    flex-direction: column-reverse;
+  }
+
+// Spaces between and around cols
+  &[class*="-spaceBetween"]{
+    justify-content: space-between;
+  }
+  &[class*="-spaceAround"]{
+    justify-content: space-around;
+  }
+
+// Equal heights columns
+  &[class*="-equalHeight"] > [class*="#{$gl-colName}"]{
+    display: flex;
+  }
+// Removes the padding-bottom
+  &[class*="-noBottom"] > [class*="#{$gl-colName}"]{
+    padding-bottom: 0;
+  }
+}
+
+
+
+// FOR COL
+[class*="#{$gl-colName}-"]{
+  &[class*="-top"]{
+    align-self: flex-start;
+  }
+  &[class*="-middle"]{
+    align-self: center;
+  }
+  &[class*="-bottom"]{
+    align-self: flex-end;
+  }
+  &[class*="-first"]{
+    order: -1;
+  }
+  &[class*="-last"]{
+    order: 1;
+  }
+}
+
+
+}
+}
+  
+}
+}
+@include alignSelf($breakpoints);
+
+
+
+
+
 /************************
     HIDING COLS
 *************************/
@@ -234,8 +334,7 @@ $glp_col-11-12: (100%/11);
 @mixin responsiveHide($breakpoints) {
   @each $breakpoint-name, $breakpoint-value in $breakpoints {
     @media screen and (min-width: $breakpoint-value) {
-      @include makeHelpers($foo);
-      [class*="#{$gl-colName}-"]:not([class*="_#{$breakpoint-name}-0"]) {
+     [class*="#{$gl-colName}-"]:not([class*="_#{$breakpoint-name}-0"]) {
         display: block;
       }
       [class*="#{$gl-gridName}"][class*="#{$gl-colName}-"]:not([class*="_#{$breakpoint-name}-0"])  {
@@ -389,31 +488,80 @@ $space-prefixes : (
 /************************
     TEXT ALIGNMENT
 *************************/
+[class*="text-align-"][class*="-l"] { text-align: left; }
+[class*="text-align-"][class*="-r"] { text-align: right; }
+[class*="text-align-"][class*="-c"] { text-align: center; }
+[class*="text-align-"][class*="-j"] { text-align: justify; }
+
 .text-left { text-align: left; }
 .text-right { text-align: right; }
 .text-center { text-align: center; }
 .text-justify { text-align: justify; }
+
+.pull-right, .alignright, .float-right { float: right; }
+.pull-left, .alignleft, .float-left { float: left; }
+.float-none, .alignnone { float: none; }
+
 @media #{$gl-sm}{
+  [class*="text-align-"][class*="_sm-l"] { text-align: left; }
+  [class*="text-align-"][class*="_sm-r"] { text-align: right; }
+  [class*="text-align-"][class*="_sm-c"] { text-align: center; }
+  [class*="text-align-"][class*="_sm-j"] { text-align: justify; }
+
   .text-sm-left { text-align: left; }
   .text-sm-right { text-align: right; }
   .text-sm-center { text-align: center; }
   .text-sm-justify { text-align: justify; }
+  
+  .pull-right, .alignright, .float-right { float: right; }
+  .pull-left, .alignleft, .float-left { float: left; }
+  .float-none, .alignnone { float: none; }
+
 }
 @media #{$gl-md}{
+  [class*="text-align-"][class*="_md-l"] { text-align: left; }
+  [class*="text-align-"][class*="_md-r"] { text-align: right; }
+  [class*="text-align-"][class*="_md-c"] { text-align: center; }
+  [class*="text-align-"][class*="_md-j"] { text-align: justify; }
+  
   .text-md-left { text-align: left; }
   .text-md-right { text-align: right; }
   .text-md-center { text-align: center; }
   .text-md-justify { text-align: justify; }
+  
+  .pull-sm-right, .alignright, .float-right { float: right; }
+  .pull-left, .alignleft, .float-left { float: left; }
+  .float-none, .alignnone { float: none; }
 }
 @media #{$gl-lg}{
+  
+  [class*="text-align-"][class*="_lg-l"] { text-align: left; }
+  [class*="text-align-"][class*="_lg-r"] { text-align: right; }
+  [class*="text-align-"][class*="_lg-c"] { text-align: center; }
+  [class*="text-align-"][class*="_lg-j"] { text-align: justify; }
+  
   .text-xl-left { text-align: left; }
   .text-xl-right { text-align: right; }
   .text-xl-center { text-align: center; }
   .text-xl-justify { text-align: justify; }
+
+  .pull-right, .alignright, .float-right { float: right; }
+  .pull-left, .alignleft, .float-left { float: left; }
+  .float-none, .alignnone { float: none; }
 }
 @media #{$gl-xl}{
+  
+  [class*="text-align-"][class*="_xl-l"] { text-align: left; }
+  [class*="text-align-"][class*="_xl-r"] { text-align: right; }
+  [class*="text-align-"][class*="_xl-c"] { text-align: center; }
+  [class*="text-align-"][class*="_xl-j"] { text-align: justify; }
+  
   .text-xl-left { text-align: left; }
   .text-xl-right { text-align: right; }
   .text-xl-center { text-align: center; }
   .text-xl-justify { text-align: justify; }
+ 
+  .pull-right, .alignright, .float-right { float: right; }
+  .pull-left, .alignleft, .float-left { float: left; }
+  .float-none, .alignnone { float: none; }
 }
