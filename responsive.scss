@@ -493,30 +493,19 @@ $space-prefixes : (
 [class*="text-align-"][class*="-c"] { text-align: center; }
 [class*="text-align-"][class*="-j"] { text-align: justify; }
 
-.text-left { text-align: left; }
-.text-right { text-align: right; }
-.text-center { text-align: center; }
-.text-justify { text-align: justify; }
-
-.pull-right, .alignright, .float-right { float: right; }
-.pull-left, .alignleft, .float-left { float: left; }
-.float-none, .alignnone { float: none; }
+[class*="float-"][class*="-l"] { float: left; }
+[class*="float-"][class*="-r"] { float: right; }
+[class*="float-"][class*="-n"] { float: none; }
 
 @media #{$gl-sm}{
   [class*="text-align-"][class*="_sm-l"] { text-align: left; }
   [class*="text-align-"][class*="_sm-r"] { text-align: right; }
   [class*="text-align-"][class*="_sm-c"] { text-align: center; }
   [class*="text-align-"][class*="_sm-j"] { text-align: justify; }
-
-  .text-sm-left { text-align: left; }
-  .text-sm-right { text-align: right; }
-  .text-sm-center { text-align: center; }
-  .text-sm-justify { text-align: justify; }
   
-  .pull-right, .alignright, .float-right { float: right; }
-  .pull-left, .alignleft, .float-left { float: left; }
-  .float-none, .alignnone { float: none; }
-
+  [class*="float-"][class*="_sm-l"] { float: left; }
+  [class*="float-"][class*="_sm-r"] { float: right; }
+  [class*="float-"][class*="_sm-n"] { float: none; }
 }
 @media #{$gl-md}{
   [class*="text-align-"][class*="_md-l"] { text-align: left; }
@@ -524,14 +513,9 @@ $space-prefixes : (
   [class*="text-align-"][class*="_md-c"] { text-align: center; }
   [class*="text-align-"][class*="_md-j"] { text-align: justify; }
   
-  .text-md-left { text-align: left; }
-  .text-md-right { text-align: right; }
-  .text-md-center { text-align: center; }
-  .text-md-justify { text-align: justify; }
-  
-  .pull-sm-right, .alignright, .float-right { float: right; }
-  .pull-left, .alignleft, .float-left { float: left; }
-  .float-none, .alignnone { float: none; }
+  [class*="float-"][class*="_md-l"] { float: left; }
+  [class*="float-"][class*="_md-r"] { float: right; }
+  [class*="float-"][class*="_md-n"] { float: none; }
 }
 @media #{$gl-lg}{
   
@@ -539,15 +523,10 @@ $space-prefixes : (
   [class*="text-align-"][class*="_lg-r"] { text-align: right; }
   [class*="text-align-"][class*="_lg-c"] { text-align: center; }
   [class*="text-align-"][class*="_lg-j"] { text-align: justify; }
-  
-  .text-xl-left { text-align: left; }
-  .text-xl-right { text-align: right; }
-  .text-xl-center { text-align: center; }
-  .text-xl-justify { text-align: justify; }
 
-  .pull-right, .alignright, .float-right { float: right; }
-  .pull-left, .alignleft, .float-left { float: left; }
-  .float-none, .alignnone { float: none; }
+  [class*="float-"][class*="_lg-l"] { float: left; }
+  [class*="float-"][class*="_lg-r"] { float: right; }
+  [class*="float-"][class*="_lg-n"] { float: none; }
 }
 @media #{$gl-xl}{
   
@@ -555,13 +534,8 @@ $space-prefixes : (
   [class*="text-align-"][class*="_xl-r"] { text-align: right; }
   [class*="text-align-"][class*="_xl-c"] { text-align: center; }
   [class*="text-align-"][class*="_xl-j"] { text-align: justify; }
-  
-  .text-xl-left { text-align: left; }
-  .text-xl-right { text-align: right; }
-  .text-xl-center { text-align: center; }
-  .text-xl-justify { text-align: justify; }
  
-  .pull-right, .alignright, .float-right { float: right; }
-  .pull-left, .alignleft, .float-left { float: left; }
-  .float-none, .alignnone { float: none; }
+  [class*="float-"][class*="_lg-l"] { float: left; }
+  [class*="float-"][class*="_lg-r"] { float: right; }
+  [class*="float-"][class*="_lg-n"] { float: none; }
 }
