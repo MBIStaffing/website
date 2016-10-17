@@ -19,6 +19,46 @@ $gl-md:        "screen and (min-width: 768px)" !default;
 $gl-lg:        "screen and (min-width: 992px)" !default;
 $gl-xl:        "screen and (min-width: 1200px)" !default;
 
+// margin and padding values array
+$space-values : (
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  10,
+  15,
+  20,
+  25,
+  30,
+  35,
+  40,
+  45,
+  50,
+  60,
+  70,
+  80
+) !default;
+
+// margin and padding shorthands
+$space-prefixes : (
+  p  : padding,
+  pt : padding-top,
+  pr : padding-right,
+  pb : padding-bottom,
+  pl : padding-left,
+  px : (padding-left, padding-right),
+  py : (padding-top, padding-bottom),
+  m  : margin,
+  mt : margin-top,
+  mr : margin-right,
+  mb : margin-bottom,
+  ml : margin-left,
+  mx : (margin-left, margin-right),
+  my : (margin-top, margin-bottom),
+) !default;
+
 $glp_col-1: (100%/12);
 $glp_col-2: ($glp_col-1*2);
 $glp_col-3: ($glp_col-1*3);
@@ -134,8 +174,6 @@ $glp_col-11-12: (100%/11);
 /************************
     HELPERS SUFFIXES
 *************************/
-
-
 // FOR GRID
 [class*="#{$gl-gridName}-"]{
 // No spacing between cols : noGutter
@@ -315,9 +353,6 @@ $glp_col-11-12: (100%/11);
 }
 @include alignSelf($breakpoints);
 
-
-
-
 /********************************************
     Responsive Alignment and Hidden
 *********************************************/
@@ -406,52 +441,9 @@ $glp_col-11-12: (100%/11);
   @include makeOff(_xl);
 }
 
-
-
 /************************
     SPACING
 *************************/
-// margin and padding values array
-$space-values : (
-  0,
-  1,
-  2,
-  3,
-  4,
-  5,
-  10,
-  15,
-  20,
-  25,
-  30,
-  35,
-  40,
-  45,
-  50,
-  60,
-  70,
-  80
-) !default;
-
-// margin and padding shorthands
-$space-prefixes : (
-  p  : padding,
-  pt : padding-top,
-  pr : padding-right,
-  pb : padding-bottom,
-  pl : padding-left,
-  px : (padding-left, padding-right),
-  py : (padding-top, padding-bottom),
-  m  : margin,
-  mt : margin-top,
-  mr : margin-right,
-  mb : margin-bottom,
-  ml : margin-left,
-  mx : (margin-left, margin-right),
-  my : (margin-top, margin-bottom),
-) !default;
-
-
 @mixin print-values-xs($prefixes, $breakpoint-name, $values) {
   @each $attr-short, $attr-long in $prefixes {
     @each $value in $values {
@@ -483,9 +475,6 @@ $space-prefixes : (
     }
   }
 }
-
-
-
 
 
 // main function definition
