@@ -79,31 +79,31 @@ $glp_col-11-12: (100%/11);
 @mixin makeOff($off)
 {
     [class*="#{$gl-gridName}"]{
-        > [data-push-left*="#{$off}-0"]{ margin-left: 0; }
-        > [data-push-left*="#{$off}-1"]{ margin-left: $glp_col-1; }
-        > [data-push-left*="#{$off}-2"]{ margin-left: $glp_col-2; }
-        > [data-push-left*="#{$off}-3"]{ margin-left: $glp_col-3; }
-        > [data-push-left*="#{$off}-4"]{ margin-left: $glp_col-4; }
-        > [data-push-left*="#{$off}-5"]{ margin-left: $glp_col-5; }
-        > [data-push-left*="#{$off}-6"]{ margin-left: $glp_col-6; }
-        > [data-push-left*="#{$off}-7"]{ margin-left: $glp_col-7; }
-        > [data-push-left*="#{$off}-8"]{ margin-left: $glp_col-8; }
-        > [data-push-left*="#{$off}-9"]{ margin-left: $glp_col-9; }
-        > [data-push-left*="#{$off}-10"]{ margin-left: $glp_col-10; }
-        > [data-push-left*="#{$off}-11"]{ margin-left: $glp_col-11; }
+        > [class*="offLeft-0"]{ margin-left: 0; }
+        > [class*="offLeft-1"]{ margin-left: $glp_col-1; }
+        > [class*="offLeft-2"]{ margin-left: $glp_col-2; }
+        > [class*="offLeft-3"]{ margin-left: $glp_col-3; }
+        > [class*="offLeft-4"]{ margin-left: $glp_col-4; }
+        > [class*="offLeft-5"]{ margin-left: $glp_col-5; }
+        > [class*="offLeft-6"]{ margin-left: $glp_col-6; }
+        > [class*="offLeft-7"]{ margin-left: $glp_col-7; }
+        > [class*="offLeft-8"]{ margin-left: $glp_col-8; }
+        > [class*="offLeft-9"]{ margin-left: $glp_col-9; }
+        > [class*="offLeft-10"]{ margin-left: $glp_col-10; }
+        > [class*="offLeft-11"]{ margin-left: $glp_col-11; }
 
-        > [data-push-right*="#{$off}-0"]{ margin-right: 0; }
-        > [data-push-right*="#{$off}-1"]{ margin-right: $glp_col-1; }
-        > [data-push-right*="#{$off}-2"]{ margin-right: $glp_col-2; }
-        > [data-push-right*="#{$off}-3"]{ margin-right: $glp_col-3; }
-        > [data-push-right*="#{$off}-4"]{ margin-right: $glp_col-4; }
-        > [data-push-right*="#{$off}-5"]{ margin-right: $glp_col-5; }
-        > [data-push-right*="#{$off}-6"]{ margin-right: $glp_col-6; }
-        > [data-push-right*="#{$off}-7"]{ margin-right: $glp_col-7; }
-        > [data-push-right*="#{$off}-8"]{ margin-right: $glp_col-8; }
-        > [data-push-right*="#{$off}-9"]{ margin-right: $glp_col-9; }
-        > [data-push-right*="#{$off}-10"]{ margin-right: $glp_col-10; }
-        > [data-push-right*="#{$off}-11"]{ margin-right: $glp_col-11; }
+        > [class*="offRight-0"]{ margin-right: 0; }
+        > [class*="offRight-1"]{ margin-right: $glp_col-1; }
+        > [class*="offRight-2"]{ margin-right: $glp_col-2; }
+        > [class*="offRight-3"]{ margin-right: $glp_col-3; }
+        > [class*="offRight-4"]{ margin-right: $glp_col-4; }
+        > [class*="offRight-5"]{ margin-right: $glp_col-5; }
+        > [class*="offRight-6"]{ margin-right: $glp_col-6; }
+        > [class*="offRight-7"]{ margin-right: $glp_col-7; }
+        > [class*="offRight-8"]{ margin-right: $glp_col-8; }
+        > [class*="offRight-9"]{ margin-right: $glp_col-9; }
+        > [class*="offRight-10"]{ margin-right: $glp_col-10; }
+        > [class*="offRight-11"]{ margin-right: $glp_col-11; }
     }
 }
 
@@ -133,6 +133,10 @@ $glp_col-11-12: (100%/11);
 /************************
     HELPERS SUFFIXES
 *************************/
+
+
+@mixin makeHelpers($foo) 
+{
 // FOR GRID
 [class*="#{$gl-gridName}-"]{
 // No spacing between cols : noGutter
@@ -194,6 +198,7 @@ $glp_col-11-12: (100%/11);
     padding-bottom: 0;
   }
 }
+}
 
 // FOR COL
 [class*="#{$gl-colName}-"]{
@@ -229,6 +234,7 @@ $glp_col-11-12: (100%/11);
 @mixin responsiveHide($breakpoints) {
   @each $breakpoint-name, $breakpoint-value in $breakpoints {
     @media screen and (min-width: $breakpoint-value) {
+      @include makeHelpers($foo);
       [class*="#{$gl-colName}-"]:not([class*="_#{$breakpoint-name}-0"]) {
         display: block;
       }
