@@ -147,7 +147,6 @@ $glp_col-11-12: (100%/11);
     }
 }
 
-
 [class*="#{$gl-gridName}"]{
   box-sizing: border-box;
   display: flex;
@@ -235,8 +234,6 @@ $glp_col-11-12: (100%/11);
   }
 }
 
-
-
 // FOR COL
 [class*="#{$gl-colName}-"]{
   &[class*="-top"]{
@@ -255,7 +252,6 @@ $glp_col-11-12: (100%/11);
     order: 1;
   }
 }
-
 
 @mixin alignSelf($breakpoints) {
 @each $breakpoint-name, $breakpoint-value in $breakpoints {
@@ -324,8 +320,6 @@ $glp_col-11-12: (100%/11);
   }
 }
 
-
-
 // FOR COL
 [class*="#{$gl-colName}-"]{
   &[class*="-top"]{
@@ -344,11 +338,8 @@ $glp_col-11-12: (100%/11);
     order: 1;
   }
 }
-
-
 }
 }
-  
 }
 }
 @include alignSelf($breakpoints);
@@ -395,10 +386,6 @@ $glp_col-11-12: (100%/11);
   [class*="float-"][class*="-r"] { float: right; }
   [class*="float-"][class*="-n"] { float: none; }
 }
-
-
-
-
 
 /************************
     GRID BY NUMBER
@@ -475,7 +462,6 @@ $glp_col-11-12: (100%/11);
     }
   }
 }
-
 
 // main function definition
 @mixin make-space($prefixes, $breakpoints, $values) {
