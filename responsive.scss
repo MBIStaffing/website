@@ -147,25 +147,33 @@ $glp_col-11-12: (100%/11);
     }
 }
 
-[class*="#{$gl-gridName}"]{
+[class*="#{$gl-gridName}"] {
   box-sizing: border-box;
   display: flex;
   flex-flow: row wrap;
   margin: 0 (-$gl-gutter/2);
 }
-.#{$gl-colName},
-[class*="#{$gl-colName}-"]{
+.#{$gl-gridName} > .#{$gl-colName},
+[class*="#{$gl-gridName}"] > [class*="#{$gl-colName}-"],
+.#{$gl-gridName}.#{$gl-colName},
+[class*="#{$gl-gridName}"][class*="#{$gl-colName}-"] {
   box-sizing: border-box;
   flex: 0 0 auto;
   padding: 0 ($gl-gutter/2) $gl-col-bottom;
   width: 100%;
   position: relative;
 }
-.#{$gl-colName}{
+
+.#{$gl-colName},
+.#{$gl-gridName} > .#{$gl-colName},
+.#{$gl-gridName}.#{$gl-colName} {
   flex: 1 1 0%;
 }
-.#{$gl-gridName}.#{$gl-colName},
-.#{$gl-gridName}[class*="#{$gl-colName}-"]{
+
+[class*="#{$gl-gridName}"].#{$gl-colName},
+[class*="#{$gl-gridName}"][class*="#{$gl-colName}-"],
+[class="#{$gl-colName}"] > [class*="#{$gl-colName}"], 
+[class*="#{$gl-colName}-"] > [class*="#{$gl-colName}"]{
   margin: 0;
   padding: 0;
 }
@@ -174,13 +182,53 @@ $glp_col-11-12: (100%/11);
     HELPERS SUFFIXES
 *************************/
 // FOR GRID
-[class*="#{$gl-gridName}-"]{
+[class*="#{$gl-gridName}-"] {
 // No spacing between cols : noGutter
+    &[class*="-noGutter"]{
+      margin: 0;
+      > [class*="#{$gl-colName}"]{
+        padding: 0;
+      }
+    }
+// Equal heights columns
+  &[class*="-equalHeight"] > [class*="#{$gl-colName}"]{
+    display: flex;
+    > *{
+      flex: 1;
+    }
+  }
+// Removes the padding-bottom
+  &[class*="-noBottom"] > [class*="#{$gl-colName}"]{
+    padding-bottom: 0;
+  }
+  // No Wrapping
+  &[class*="-noWrap"]{
+    flex-wrap: nowrap;
+  }
+}
+
+[class*="flex-"] {
+  &[class*="-equalHeight"] {
+    display: flex;
+    > *{
+      flex: 1;
+    }
+  }
+}
+
+[class*="flex-flex"] {
+  box-sizing: border-box;
+  display: flex;
+}
+
+[class*="flex-children"] > * {
+    width: 100%;
+}
+
+[class*="#{$gl-gridName}-"], 
+[class*="flex-"] {
   &[class*="-noGutter"]{
     margin: 0;
-    > [class*="#{$gl-colName}"]{
-      padding: 0;
-    }
   }
 // Horizontal alignment
   &[class*="-center"]{
@@ -223,15 +271,6 @@ $glp_col-11-12: (100%/11);
   &[class*="-spaceAround"]{
     justify-content: space-around;
   }
-
-// Equal heights columns
-  &[class*="-equalHeight"] > [class*="#{$gl-colName}"]{
-    display: flex;
-  }
-// Removes the padding-bottom
-  &[class*="-noBottom"] > [class*="#{$gl-colName}"]{
-    padding-bottom: 0;
-  }
 }
 
 // FOR COL
@@ -253,96 +292,6 @@ $glp_col-11-12: (100%/11);
   }
 }
 
-@mixin alignSelf($breakpoints) {
-@each $breakpoint-name, $breakpoint-value in $breakpoints {
- @if $breakpoint-value == 0 {
- }
- @else {
-  @media screen and (min-width: $breakpoint-value) {
-// FOR GRID
-[class*="#{$gl-gridName}-"]{
-// No spacing between cols : noGutter
-  &[class*="-noGutter"]{
-    margin: 0;
-    > [class*="#{$gl-colName}"]{
-      padding: 0;
-    }
-  }
-// Horizontal alignment
-  &[class*="-center"]{
-    justify-content: center;
-  }
-  &[class*="-right"]{
-    justify-content: flex-end;
-    align-self: flex-end;
-    margin-left: auto;
-  }
-// Vertical alignment
-  &[class*="-top"]{
-    align-items: flex-start;
-  }
-  &[class*="-middle"]{
-    align-items: center;
-  }
-  &[class*="-bottom"]{
-    align-items: flex-end;
-  }
-
-// Orders
-  &[class*="-reverse"]{
-    flex-direction: row-reverse;
-  }
-  &[class*="-column"] {
-    flex-direction: column;
-    > [class*="#{$gl-colName}-"] {
-      flex-basis: auto;
-    }
-  }
-  &[class*="-column-reverse"]{
-    flex-direction: column-reverse;
-  }
-
-// Spaces between and around cols
-  &[class*="-spaceBetween"]{
-    justify-content: space-between;
-  }
-  &[class*="-spaceAround"]{
-    justify-content: space-around;
-  }
-
-// Equal heights columns
-  &[class*="-equalHeight"] > [class*="#{$gl-colName}"]{
-    display: flex;
-  }
-// Removes the padding-bottom
-  &[class*="-noBottom"] > [class*="#{$gl-colName}"]{
-    padding-bottom: 0;
-  }
-}
-
-// FOR COL
-[class*="#{$gl-colName}-"]{
-  &[class*="-top"]{
-    align-self: flex-start;
-  }
-  &[class*="-middle"]{
-    align-self: center;
-  }
-  &[class*="-bottom"]{
-    align-self: flex-end;
-  }
-  &[class*="-first"]{
-    order: -1;
-  }
-  &[class*="-last"]{
-    order: 1;
-  }
-}
-}
-}
-}
-}
-@include alignSelf($breakpoints);
 
 /********************************************
     Responsive Alignment and Hidden
@@ -377,15 +326,7 @@ $glp_col-11-12: (100%/11);
     }
   }
 }
-@include responsiveDisplay($breakpoints) {
-  [class*="text-align-"][class*="-l"] { text-align: left; }
-  [class*="text-align-"][class*="-r"] { text-align: right; }
-  [class*="text-align-"][class*="-c"] { text-align: center; }
-  [class*="text-align-"][class*="-j"] { text-align: justify; }
-  [class*="float-"][class*="-l"] { float: left; }
-  [class*="float-"][class*="-r"] { float: right; }
-  [class*="float-"][class*="-n"] { float: none; }
-}
+@include responsiveDisplay($breakpoints);
 
 /************************
     GRID BY NUMBER
@@ -434,7 +375,7 @@ $glp_col-11-12: (100%/11);
 @mixin print-values-xs($prefixes, $breakpoint-name, $values) {
   @each $attr-short, $attr-long in $prefixes {
     @each $value in $values {
-      .#{$attr-short}-#{$value} {
+      [class*="space_"][class*="_#{$attr-short}-#{$value}"] {
         @if(length($attr-long)) {
           @each $a in $attr-long {
             #{$a}: #{$value}px;
@@ -450,6 +391,7 @@ $glp_col-11-12: (100%/11);
 @mixin print-values($prefixes, $breakpoint-name, $values) {
   @each $attr-short, $attr-long in $prefixes {
     @each $value in $values {
+      [class*="space_"][class*="_#{$attr-short}-#{$breakpoint-name}-#{$value}"],
       .#{$attr-short}-#{$breakpoint-name}-#{$value} {
         @if(length($attr-long)) {
           @each $a in $attr-long {
@@ -479,3 +421,63 @@ $glp_col-11-12: (100%/11);
   }
 }
 @include make-space($space-prefixes, $breakpoints, $space-values );
+
+
+
+
+
+
+
+  [class*="align_l"]  { text-align: left; }
+  [class*="align_r"] { text-align: right; }
+  [class*="align_c"]  { text-align: center; }
+  [class*="align_j"]  { text-align: justify; }
+  
+  [class*="float_l"] { float: left; }
+  [class*="float_r"] { float: right; }
+  [class*="float_n"] { float: none; }
+
+
+@media ( min-width: 576px ) {
+  [class*="align_"][class*="_sm-align-l"] { text-align: left; }
+  [class*="align_"][class*="_sm-align-r"] { text-align: right; }
+  [class*="align_"][class*="_sm-align-c"] { text-align: center; }
+  [class*="align-"][class*="_sm-align-j"] { text-align: justify; }
+  
+  [class*="float_"][class*="_sm-float-l"] { float: left; }
+  [class*="float-"][class*="_sm-float-l"] { float: right; }
+  [class*="float_"][class*="_sm-float-l"] { float: none; }
+}
+
+@media ( min-width: 768px ) {
+  [class*="align_"][class*="_md-align-l"]   { text-align: left; }
+  [class*="align_"][class*="_md-align-r"] { text-align: right; }
+  [class*="align_"][class*="_md-align-c"] { text-align: center; }
+  [class*="align_"][class*="_md-align-j"] { text-align: justify; }
+  
+  [class*="align_"][class*="_md-align-l"] { float: left; }
+  [class*="align_"][class*="_md-align-r"] { float: right; }
+  [class*="align_"][class*="_md-align-n"] { float: none; }
+}
+  
+@media ( min-width: 992px ) {
+  [class*="align_"][class*="_lg-align-l"] { text-align: left; }
+  [class*="align_"][class*="_lg-align-r"] { text-align: right; }
+  [class*="align_"][class*="_lg-align-c"] { text-align: center; }
+  [class*="align_"][class*="_lg-align-j"] { text-align: justify; }
+  
+  [class*="align_"][class*="_lg-float-l"] { float: left; }
+  [class*="align_"][class*="_lg-float-r"] { float: right; }
+  [class*="align_"][class*="_lg-float-n"] { float: none; }
+}
+  
+@media ( min-width: 1200px ) {
+  [class*="align_"][class*="_xl-align-l"] { text-align: left; }
+  [class*="align_"][class*="_xl-align-r"] { text-align: right; }
+  [class*="align_"][class*="_lg-align-c"] { text-align: center; }
+  [class*="align_"][class*="_xl-align-j"] { text-align: justify; }
+  
+  [class*="align_"][class*="_xl-float-l"] { float: left; }
+  [class*="align_"][class*="_xl-float-r"] { float: right; }
+  [class*="align_"][class*="_xl-float-n"] { float: none; }
+}
