@@ -1013,13 +1013,13 @@ ul.nav.nav-tabs {
 
    <div class="cell-12_md-4">
       <div class="service-box-10">
-         <a href="tel:+18153821404">
+         <a href="tel:+18158805223">
             <div class="icon-container">
                <i class="lnr lnr-telephone"></i>
             </div><!-- // .icon-container -->
             <div class="service-detail-container">
                <h4>Call Us</h4>
-               <p>Call (815) 382-1404</p>
+               <p>Call (815) 880-5223</p>
 					<span class="contact-info-small"> Weekdays 9am to 6pm CST</span>
             </div><!-- // .service-detail-container -->
          </a>
